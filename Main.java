@@ -18,7 +18,7 @@ public class Main {
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
-
+        // COMMİT TESTİ
         return "DUMMY";
     }
 
