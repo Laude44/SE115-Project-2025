@@ -9,7 +9,7 @@ public class Main {
     static String[] commodities = {"Gold", "Oil", "Silver", "Wheat", "Copper"};
     static String[] months = {"January","February","March","April","May","June",
                               "July","August","September","October","November","December"};
-    
+    public static int[][][] dataMemory = new int[MONTHS][DAYS][COMMS];
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
@@ -18,7 +18,9 @@ public class Main {
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
-        // COMMİT TESTİ
+        for(int i =0;i<10;i++){
+
+        }
         return "DUMMY";
     }
 
