@@ -18,10 +18,20 @@ public class Main {
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
-        for(int i =0;i<10;i++){
+        if(month<0 || month > 12) return "INVALID_MONTH";
+        int mostProfComIndex=0;
+        int mostProfComProfit=0;
 
+        for(int i =0;i<COMMS;i++){
+            int comsTotalProfit=0;
+            for(int j =0;j>DAYS;j++){
+            comsTotalProfit += dataMemory[month][j][i];
+            }
+            if(comsTotalProfit > mostProfComProfit){
+                mostProfComIndex=i;
+                mostProfComProfit=comsTotalProfit;}
         }
-        return "DUMMY";
+        return commodities[mostProfComIndex] ;
     }
 
     public static int totalProfitOnDay(int month, int day) {
