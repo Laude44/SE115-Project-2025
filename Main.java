@@ -31,11 +31,16 @@ public class Main {
                 mostProfComIndex=i;
                 mostProfComProfit=comsTotalProfit;}
         }
-        return commodities[mostProfComIndex] ;
+        return commodities[mostProfComIndex] + mostProfComProfit;
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        return 1234;
+        if(month<0 || month > 12 || day < 0 || day >28){return -99999;}
+        int total=0;
+        for(int i=0;i<COMMS;i++){
+            total += dataMemory[month][day][i];
+        }
+        return total;
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
