@@ -6,6 +6,7 @@ public class Main {
     static final int MONTHS = 12;
     static final int DAYS = 28;
     static final int COMMS = 5;
+    static final int ERROR = -99999;
     static String[] commodities = {"Gold", "Oil", "Silver", "Wheat", "Copper"};
     static String[] months = {"January","February","March","April","May","June",
                               "July","August","September","October","November","December"};
@@ -24,7 +25,7 @@ public class Main {
 
         for(int i =0;i<COMMS;i++){
             int comsTotalProfit=0;
-            for(int j =0;j>DAYS;j++){
+            for(int j =0;j<DAYS;j++){
             comsTotalProfit += dataMemory[month][j][i];
             }
             if(comsTotalProfit > mostProfComProfit){
@@ -35,7 +36,7 @@ public class Main {
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        if(month<0 || month > 12 || day < 0 || day >28){return -99999;}
+        if(month<0 || month > 12 || day < 0 || day >28){return ERROR;}
         int total=0;
         for(int i=0;i<COMMS;i++){
             total += dataMemory[month][day][i];
@@ -44,6 +45,18 @@ public class Main {
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
+    if(from > to || from < 1 || to > 28 ){return ERROR;}
+    int commodityIndex =-1;
+        for(int i=0;i<commodities.length;i++){
+            if(commodity.equals(commodities[i])){commodityIndex=i;}
+        }
+        int total =0;
+        for(int i=0;i<MONTHS;i++){
+            for(int j=from -1 ;j<to -1 ;j++){
+            total += dataMemory[i][j][];
+        }
+    }
+
         return 1234;
     }
 
