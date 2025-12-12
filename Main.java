@@ -50,22 +50,56 @@ public class Main {
         for(int i=0;i<commodities.length;i++){
             if(commodity.equals(commodities[i])){commodityIndex=i;}
         }
+        if(commodityIndex==-1){return ERROR;}
         int total =0;
         for(int i=0;i<MONTHS;i++){
             for(int j=from -1 ;j<to -1 ;j++){
-            total += dataMemory[i][j][];
+            total += dataMemory[i][j][commodityIndex];
         }
     }
-
-        return 1234;
+        return total;
     }
 
     public static int bestDayOfMonth(int month) { 
-        return 1234; 
+        if(month > 12 || month < 0) {return -1;}
+        int bestDayIndex=-1;
+        int bestDayTotal=0;
+
+        for(int i=0;i<28;i++){
+            int dayTotal=0;
+            for(int j=0;i<5;i++){
+                dayTotal+=dataMemory[month][i][j];
+            }
+            if(dayTotal>bestDayTotal){
+                bestDayTotal=dayTotal;
+                bestDayIndex=i;}
+        }
+        return bestDayIndex;
     }
     
-    public static String bestMonthForCommodity(String comm) { 
-        return "DUMMY"; 
+    public static String bestMonthForCommodity(String comm) {
+        int commodityIndex =-1;
+        for(int i=0;i<commodities.length;i++){
+            if(comm.equals(commodities[i])){commodityIndex=i;}
+        }
+        if(commodityIndex==-1){return "INVALID_COMMODITY";}
+        int bestMonthIndex=-1;
+        int bestMonthTotal=0;
+        for(int i=0;i<12;i++){
+            int monthTotal=0;
+            for(int j=0;j<28;j++){
+                monthTotal=dataMemory[i][j][commodityIndex];
+            }
+            if(monthTotal>bestMonthTotal) {
+                bestMonthIndex=i;
+                bestMonthTotal=monthTotal;
+            }
+        }
+
+
+
+
+        return commodities[bestMonthIndex];
     }
 
     public static int consecutiveLossDays(String comm) { 
