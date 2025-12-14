@@ -32,11 +32,11 @@ public class Main {
                 mostProfComIndex=i;
                 mostProfComProfit=comsTotalProfit;}
         }
-        return commodities[mostProfComIndex] + mostProfComProfit;
+        return commodities[mostProfComIndex] +" "+ mostProfComProfit;
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        if(month<0 || month > 11 || day < 0 || day >28){return ERROR;}
+        if(month<0 || month > 11 || day < 0 || day >27){return ERROR;}
         int total=0;
         for(int i=0;i<COMMS;i++){
             total += dataMemory[month][day][i];
@@ -67,7 +67,7 @@ public class Main {
 
         for(int i=0;i<28;i++){
             int dayTotal=0;
-            for(int j=0;i<5;i++){
+            for(int j=0;j<5;j++){
                 dayTotal+=dataMemory[month][i][j];
             }
             if(dayTotal>bestDayTotal){
@@ -95,7 +95,7 @@ public class Main {
                 bestMonthTotal=monthTotal;
             }
         }
-        return commodities[bestMonthIndex];
+        return months[bestMonthIndex];
     }
 
     public static int consecutiveLossDays(String comm) {
@@ -105,16 +105,19 @@ public class Main {
         }
         if(commodityIndex==-1){return -1;}
         int loseStreak =0;
+        int maxStreak =0;
         for(int i=0;i<12;i++){
             for(int j=0;j<28;j++){
                 if(dataMemory[i][j][commodityIndex]<0){
                     loseStreak++;
                 }
-                else{loseStreak=0;
+                else{
+                    maxStreak=loseStreak;
+                    loseStreak=0;
                 }
             }
         }
-        return loseStreak;
+        return maxStreak;
     }
     
     public static int daysAboveThreshold(String comm, int threshold) {
@@ -182,15 +185,21 @@ public class Main {
     
     public static String bestWeekOfMonth(int month) {
         if(month > 11 || month < 0) {return "INVALID_MONTH";}
+        int bestWeek=0;
+        int bestWeekTotal=0;
         for(int i =0;i<4;i++){
-            int bestWeek=0;
+            int weekTotal=0;
             for(int j=0;j<7;j++){
-
+                for(int c=0;c<5;c++){
+                    weekTotal += dataMemory[month][i*7+j][c];
+                }
+            }
+            if(weekTotal>bestWeekTotal){
+                bestWeek=i;
+                bestWeekTotal=weekTotal;
             }
         }
-
-
-        return "DUMMY"; 
+        return "Best week is week number " + (bestWeek+1); // insade the paranteziz because of the math.
     }
 
     public static void main(String[] args) {
