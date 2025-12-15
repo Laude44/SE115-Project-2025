@@ -21,7 +21,7 @@ public class Main {
     public static String mostProfitableCommodityInMonth(int month) {
         if(month<0 || month > 11) return "INVALID_MONTH";
         int mostProfComIndex=0;
-        int mostProfComProfit=0;
+        int mostProfComProfit=Integer.MIN_VALUE;
 
         for(int i =0;i<COMMS;i++){
             int comsTotalProfit=0;
@@ -36,14 +36,13 @@ public class Main {
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        if(month<0 || month > 11 || day < 0 || day >27){return ERROR;}
+        if(month<0 || month > 11 || day < 1 || day >28){return ERROR;}
         int total=0;
         for(int i=0;i<COMMS;i++){
-            total += dataMemory[month][day][i];
+            total += dataMemory[month][day-1][i];
         }
         return total;
     }
-
     public static int commodityProfitInRange(String commodity, int from, int to) {
     if(from > to || from < 1 || to > 28 ){return ERROR;}
     int commodityIndex =-1;
@@ -53,17 +52,17 @@ public class Main {
         if(commodityIndex==-1){return ERROR;}
         int total =0;
         for(int i=0;i<MONTHS;i++){
-            for(int j=from -1 ;j<to -1 ;j++){
+            for(int j=from -1 ;j<to ;j++){
             total += dataMemory[i][j][commodityIndex];
+            }
         }
-    }
         return total;
     }
 
     public static int bestDayOfMonth(int month) { 
         if(month > 11 || month < 0) {return -1;}
         int bestDayIndex=-1;
-        int bestDayTotal=0;
+        int bestDayTotal=Integer.MIN_VALUE;
 
         for(int i=0;i<28;i++){
             int dayTotal=0;
@@ -74,7 +73,7 @@ public class Main {
                 bestDayTotal=dayTotal;
                 bestDayIndex=i;}
         }
-        return bestDayIndex;
+        return bestDayIndex +1;
     }
     
     public static String bestMonthForCommodity(String comm) {
@@ -84,7 +83,7 @@ public class Main {
         }
         if(commodityIndex==-1){return "INVALID_COMMODITY";}
         int bestMonthIndex=-1;
-        int bestMonthTotal=0;
+        int bestMonthTotal=Integer.MIN_VALUE;
         for(int i=0;i<12;i++){
             int monthTotal=0;
             for(int j=0;j<28;j++){
@@ -112,10 +111,13 @@ public class Main {
                     loseStreak++;
                 }
                 else{
-                    maxStreak=loseStreak;
+                    if(loseStreak>maxStreak){maxStreak=loseStreak;}
                     loseStreak=0;
                 }
             }
+        }
+        if (loseStreak > maxStreak) {
+            maxStreak = loseStreak;
         }
         return maxStreak;
     }
@@ -178,15 +180,15 @@ public class Main {
                 c2Total += dataMemory[i][j][commodityIndexc2];
             }
         }
-        if(c1Total>c2Total){return c1+" is better than "+c2;}
-        else if(c1Total<c2Total){return c2+" is better than "+c1;}
-        else {return c1+" is equal to "+c2;}
+        if(c1Total>c2Total){return c1+" is better by "+ (c1Total - c2Total);}
+        else if(c1Total<c2Total){return c2+" is better by "+(c2Total- c1Total);}
+        else {return "Equal" ;}
     }
     
     public static String bestWeekOfMonth(int month) {
         if(month > 11 || month < 0) {return "INVALID_MONTH";}
         int bestWeek=0;
-        int bestWeekTotal=0;
+        int bestWeekTotal=Integer.MIN_VALUE;
         for(int i =0;i<4;i++){
             int weekTotal=0;
             for(int j=0;j<7;j++){
@@ -199,7 +201,7 @@ public class Main {
                 bestWeekTotal=weekTotal;
             }
         }
-        return "Best week is week number " + (bestWeek+1); // insade the paranteziz because of the math.
+        return "Week " + (bestWeek+1); // insade the paranteziz because of the math.
     }
 
     public static void main(String[] args) {
