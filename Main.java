@@ -1,5 +1,6 @@
 // Main.java — Students version
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Main {
@@ -14,21 +15,27 @@ public class Main {
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        for(int i=0;i<months.length;i++){
+            String fileName = months[i]+".txt";
+            Scanner read = null;
+            try{
+                read = new Scanner(Paths.get(fileName));
+                do{
+                    String line = read.nextLine();
+                    String[] lineData = line.split(",");
+                    dataMemory[i][lineData[0]][]=
+                }
+                while (read.hasNextLine());
+            }
+            catch (Exception e){
+                System.out.println("File counld not been found!");
+            }
+            finally {
+                if(read!=null){
+                   read.close();
+                }
+            }
+        }
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
