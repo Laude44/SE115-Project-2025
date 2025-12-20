@@ -14,6 +14,21 @@ public class Main {
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
