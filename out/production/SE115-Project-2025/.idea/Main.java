@@ -1,4 +1,5 @@
 // Main.java — Students version
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -9,7 +10,7 @@ public class Main {
     static final int ERROR = -99999;
     static String[] commodities = {"Gold", "Oil", "Silver", "Wheat", "Copper"};
     static String[] months = {"January","February","March","April","May","June",
-                              "July","August","September","October","November","December"};
+            "July","August","September","October","November","December"};
     public static int[][][] dataMemory = new int[MONTHS][DAYS][COMMS];
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
@@ -40,11 +41,12 @@ public class Main {
                 }
 
             }
-            catch (Exception e){
+            catch (IOException e){
+
             }
             finally {
                 if(read!=null){
-                   read.close();
+                    read.close();
                 }
             }
         }
@@ -60,7 +62,7 @@ public class Main {
         for(int i =0;i<COMMS;i++){
             int comsTotalProfit=0;
             for(int j =0;j<DAYS;j++){
-            comsTotalProfit += dataMemory[month][j][i];
+                comsTotalProfit += dataMemory[month][j][i];
             }
             if(comsTotalProfit > mostProfComProfit){
                 mostProfComIndex=i;
@@ -78,8 +80,8 @@ public class Main {
         return total;
     }
     public static int commodityProfitInRange(String commodity, int from, int to) {
-    if(from > to || from < 1 || from > 28 || to < 1 || to > 28 ){return ERROR;}
-    int commodityIndex =-1;
+        if(from > to || from < 1 || to > 28 ){return ERROR;}
+        int commodityIndex =-1;
         for(int i=0;i<commodities.length;i++){
             if(commodity.equals(commodities[i])){commodityIndex=i;}
         }
@@ -87,7 +89,7 @@ public class Main {
         int total =0;
         for(int i=0;i<MONTHS;i++){
             for(int j=from -1 ;j<to ;j++){
-            total += dataMemory[i][j][commodityIndex];
+                total += dataMemory[i][j][commodityIndex];
             }
         }
         return total;
@@ -241,6 +243,5 @@ public class Main {
     public static void main(String[] args) {
         loadData();
         System.out.println("Data loaded – ready for queries");
-
-        }
     }
+}
