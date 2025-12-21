@@ -20,12 +20,26 @@ public class Main {
             Scanner read = null;
             try{
                 read = new Scanner(Paths.get(fileName));
-                do{
+                if(read.hasNextLine()){String line= read.nextLine();}       //Reading the first line
+
+                while (read.hasNextLine()){
                     String line = read.nextLine();
                     String[] lineData = line.split(",");
-                    dataMemory[i][lineData[0]][]=
+
+                    int dayIndex= Integer.parseInt(lineData[0]);
+                    dayIndex--;
+                    String commodity = lineData[1];
+                    int profit=Integer.parseInt(lineData[2]);
+                    int commodityIndex =-1;
+                    for(int c=0;c<5;c++){
+                        if(commodities[c].equals(commodity)){
+                            commodityIndex=c;
+                            break;}
+
+                    }
+                    dataMemory[i][dayIndex][commodityIndex]=profit;
                 }
-                while (read.hasNextLine());
+
             }
             catch (Exception e){
                 System.out.println("File counld not been found!");
@@ -229,5 +243,8 @@ public class Main {
     public static void main(String[] args) {
         loadData();
         System.out.println("Data loaded – ready for queries");
+        for(int i=0;i<5;i++){
+            System.out.println(dataMemory[0][15][i]);
+        }
     }
 }
