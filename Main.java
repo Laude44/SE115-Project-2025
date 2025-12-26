@@ -19,7 +19,7 @@ public class Main {
             Scanner read = null;
             try{
                 read = new Scanner(Paths.get(fileName));
-                if(read.hasNextLine()){String line= read.nextLine();}       //Reading the first line
+                if(read.hasNextLine()){String line= read.nextLine();}
 
                 while (read.hasNextLine()){
                     String line = read.nextLine();
